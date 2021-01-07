@@ -6,24 +6,25 @@ app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/public'))
 
 .use((req, res, next)=>{
-    if(1>new Date().getDate()>6 && 9>=new Date().getHours() >=17) {
+    if(0<new Date().getDay()<6 && 9<=new Date().getHours() <13) {
         next();
     } else {
-        res.status(404).render("pages/available")
+        res.render("pages/available")
     }
-    
+    console.log(new Date().getDay())
+    console.log(new Date().getHours())
 })
 
 .get("/",(req, res)=>{
-    res.status(200).render('pages/index')
+    res.render('pages/index')
 })
 
 .get("/services", (req, res)=>{
-    res.status(200).render('pages/services')
+    res.render('pages/services')
 })
 
 .get("/contact", (req, res)=>{
-    res.status(200).render('pages/contact')
+    res.render('pages/contact')
 })
 
 .listen(8080)
